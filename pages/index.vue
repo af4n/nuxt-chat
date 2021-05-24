@@ -1,14 +1,24 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-
-    </v-col>
-  </v-row>
+  <v-layout column justify-center align-center>
+    <v-flex xs12 sm8 md6>
+      <v-btn @click="message">NEW MESSAGE</v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-
 export default {
-  components: {}
-}
+  sockets: {
+    connect: function() {
+      console.log("socket connected");
+    }
+  },
+  methods: {
+    message() {
+      this.$socket.emit("createMessage", {
+        text: "FROM CLIENT"
+      });
+    }
+  }
+};
 </script>
